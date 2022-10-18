@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Data</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<p>This document is to record the details of some of the internal specifications
+of INLA. The purpose of this is largely to document what INLA is doing for
+comparing model implementations in other software.</p>
+
+<p><strong>Make sure to be using a version of INLA more recent than INLA<em>20.06.15 _testing</em>
+version when the internal implementation of the RW1 and RW2 models was updated to
+be consistent with manual model scaling.</strong></p>
+
+<pre><code class="r">library(INLA)
+</code></pre>
+
+<h1>Data</h1>
+
+<p>Create some very simple space-time data for testing INLA. Data are for four
+areas in which area 2 is connected to all other areas, areas 1 and 3 are
+connected, and area 4 is connected only to area 2. Three time points are
+simulated.</p>
+
+<pre><code class="r">set.seed(1)
+data &lt;- expand.grid(area = 1:4,
+                    time = 1:3)
+
+data$y &lt;- rpois(nrow(data), 2.5)
+
+adj &lt;- rbind(c(0, 1, 1, 0),
+             c(0, 0, 1, 1),
+             0,
+             0)
+adj &lt;- adj + t(adj)
+rownames(adj) &lt;- colnames(adj) &lt;- letters[1:4]
+
+adj
+</code></pre>
+
+<pre><code>##   a b c d
+## a 0 1 1 0
+## b 1 0 1 1
+## c 1 1 0 0
+## d 0 1 0 0
+</code></pre>
+
+<p>Structure matrices for ICAR area effect and RW1 time effects.</p>
+
+<pre><code class="r">R_area &lt;- diag(rowSums(adj)) - adj
+R_time &lt;- t(diff(diag(3))) %*% diff(diag(3))
+
+R_area
+</code></pre>
+
+<pre><code>##    a  b  c  d
+## a  2 -1 -1  0
+## b -1  3 -1 -1
+## c -1 -1  2  0
+## d  0 -1  0  1
+</code></pre>
+
+<pre><code class="r">R_time
+</code></pre>
+
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1   -1    0
+## [2,]   -1    2   -1
+## [3,]    0   -1    1
+</code></pre>
+
+<h1>Details of INLA internals</h1>
+
+<p>This section documents details of how certain arguments and options are
+implemented by INLA such as how the small constant is added to the diagonal,
+model scaling, and kronecker product for the <code>f(..., group = &lt;&gt;)</code> option.</p>
+
+<p>The strategy for checking is to create a &#39;null&#39; data set with no observations
+and &#39;fit&#39; the model with fixed values for the hyper parameters to recover
+the Q matrix constructed by INLA.</p>
+
+<pre><code class="r">datanull &lt;- data[data$area == 1, ]
+datanull$y &lt;- NA
+
+hyper_area &lt;- list(prec = list(initial = log(1), fixed = TRUE))
+hyper_time &lt;- list(prec = list(initial = log(1), fixed = TRUE))
+</code></pre>
+
+<h2>ICAR model</h2>
+
+<pre><code class="r">fit1 &lt;- inla(y ~ 0 +
+               f(area, model = &quot;besag&quot;, graph = adj, hyper = hyper_area),
+             data = datanull, family = &quot;poisson&quot;,
+             control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+             control.fixed = list(mean.intercept = 0, prec.intercept = 1),
+             control.compute = list(config = TRUE))
+</code></pre>
+
+<h3>Extra constant added to diagonal</h3>
+
+<ul>
+<li>The default value for the diagonal extra constant is 10<sup>-4</sup>.
+
+<ul>
+<li>This is ascertained from <code>INLA:::inla.set.f.default()$diagonal</code>.</li>
+</ul></li>
+<li>This is added <em>after</em> scaling the matrix by the precision parameter.</li>
+</ul>
+
+<p>To see this, in <code>fit1</code> the fixed value for the precision is 1.0 and in
+<code>fit2</code> the value for the precision is 2.0. The added value along the
+diagonal in both cases is 1e-5.</p>
+
+<pre><code class="r">hyper_area2 &lt;- list(prec = list(initial = log(2), fixed = TRUE))
+
+fit2 &lt;- inla(y ~ 0 +
+               f(area, model = &quot;besag&quot;, graph = adj, hyper = hyper_area2),
+             data = datanull, family = &quot;poisson&quot;,
+             control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+             control.fixed = list(mean.intercept = 0, prec.intercept = 1),
+             control.compute = list(config = TRUE))
+
+fit1$misc$configs$config[[1]]$Q[-(1:3), -(1:3)]
+</code></pre>
+
+<pre><code>## 4 x 4 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                    
+## [1,]  3e+06 -1.0000 -1.0000  .     
+## [2,] .       3.0001 -1.0000 -1.0000
+## [3,] .       .       2.0001  .     
+## [4,] .       .       .       1.0001
+</code></pre>
+
+<pre><code class="r">fit2$misc$configs$config[[1]]$Q[-(1:3), -(1:3)]
+</code></pre>
+
+<pre><code>## 4 x 4 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                     
+## [1,] 3000002 -2.0000 -2.0000  .     
+## [2,]       .  6.0001 -2.0000 -2.0000
+## [3,]       .  .       4.0001  .     
+## [4,]       .  .       .       2.0001
+</code></pre>
+
+<h3>Application of <code>f(..., scale.model = TRUE)</code></h3>
+
+<p>When argument <code>scale.model = TRUE</code>, the precision matrix is scaled so that
+the generalised variance is 1.</p>
+
+<ul>
+<li>A sum-to-zero constraint is applied in the model scaling. (Likely a
+different constraint is applied if there are multiple connected components).</li>
+<li>No constant is added to the diagonal before model scaling.</li>
+</ul>
+
+<pre><code class="r">fit &lt;- inla(y ~ 0 +
+              f(area, model = &quot;besag&quot;, graph = adj, hyper = hyper_area,
+                scale.model = TRUE),
+            data = datanull, family = &quot;poisson&quot;,
+            control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+            control.fixed = list(mean.intercept = 0, prec.intercept = 1),
+            control.compute = list(config = TRUE))
+
+fit$misc$configs$constr
+</code></pre>
+
+<pre><code>## $nc
+## [1] 1
+## 
+## $A
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+## [1,]    0    0    0    1    1    1    1
+## 
+## $e
+## [1] 0
+</code></pre>
+
+<pre><code class="r">fit$misc$configs$config[[1]]$Q[-(1:3), -(1:3)]
+</code></pre>
+
+<pre><code>## 4 x 4 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                              
+## [1,] 2999999 -0.3565926 -0.3565926  .        
+## [2,]       .  1.0698778 -0.3565926 -0.3565926
+## [3,]       .  .          0.7132852  .        
+## [4,]       .  .          .          0.3566926
+</code></pre>
+
+<pre><code class="r">inla.scale.model(R_area, constr = list(A = matrix(1, ncol = 4), e = 0))
+</code></pre>
+
+<pre><code>## 4 x 4 sparse Matrix of class &quot;dgTMatrix&quot;
+##            a          b          c          d
+## a  0.7131852 -0.3565926 -0.3565926  .        
+## b -0.3565926  1.0697778 -0.3565926 -0.3565926
+## c -0.3565926 -0.3565926  0.7131852  .        
+## d  .         -0.3565926  .          0.3565926
+</code></pre>
+
+<ul>
+<li>Even if <code>constr = FALSE</code> or an alternative constraint is specified in the
+<code>f()</code> object, the same sum-to-zero constraint is applied to the model
+scaling.</li>
+</ul>
+
+<pre><code class="r">fit_no_constr &lt;- inla(y ~ 0 +
+             f(area, model = &quot;besag&quot;, graph = adj, hyper = hyper_area,
+               scale.model = TRUE, constr = FALSE),
+           data = datanull, family = &quot;poisson&quot;,
+           control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+           control.fixed = list(mean.intercept = 0, prec.intercept = 1),
+           control.compute = list(config = TRUE))
+
+fit_no_constr$misc$configs$constr
+</code></pre>
+
+<pre><code>## NULL
+</code></pre>
+
+<pre><code class="r">fit_no_constr$misc$configs$config[[1]]$Q[-(1:3), -(1:3)]
+</code></pre>
+
+<pre><code>## 4 x 4 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                              
+## [1,] 2999999 -0.3565926 -0.3565926  .        
+## [2,]       .  1.0697780 -0.3565926 -0.3565926
+## [3,]       .  .          0.7131854  .        
+## [4,]       .  .          .          0.3565927
+</code></pre>
+
+<pre><code class="r">fit_alt_constr &lt;- inla(y ~ 0 +
+              f(area, model = &quot;besag&quot;, graph = adj, hyper = hyper_area,
+                scale.model = TRUE, constr = FALSE,
+                diagonal = 0,
+                extraconstr = list(A = matrix(c(1, 1, 0, 0), 1), e = 3)),
+            data = datanull, family = &quot;poisson&quot;,
+            control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+            control.fixed = list(mean.intercept = 0, prec.intercept = 1),
+            control.compute = list(config = TRUE))
+
+fit_alt_constr$misc$configs$constr
+</code></pre>
+
+<pre><code>## $nc
+## [1] 1
+## 
+## $A
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+## [1,]    0    0    0    1    1    0    0
+## 
+## $e
+## [1] 3
+</code></pre>
+
+<pre><code class="r">fit_alt_constr$misc$configs$config[[1]]$Q[-(1:3), -(1:3)]
+</code></pre>
+
+<pre><code>## 4 x 4 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                              
+## [1,] 2999999 -0.3565926 -0.3565926  .        
+## [2,]       .  1.0697780 -0.3565926 -0.3565926
+## [3,]       .  .          0.7131854  .        
+## [4,]       .  .          .          0.3565927
+</code></pre>
+
+<p>Called externally, the alternative constraint does slightly affect model
+scaling, and so the above confirms that the alternative constraint is not
+used in the <code>scale.model</code> specification.</p>
+
+<pre><code class="r">inla.scale.model(R_area, constr = list(A = matrix(c(1, 1, 1, 1), ncol = 4), e = 0))
+</code></pre>
+
+<pre><code>## 4 x 4 sparse Matrix of class &quot;dgTMatrix&quot;
+##            a          b          c          d
+## a  0.7131852 -0.3565926 -0.3565926  .        
+## b -0.3565926  1.0697778 -0.3565926 -0.3565926
+## c -0.3565926 -0.3565926  0.7131852  .        
+## d  .         -0.3565926  .          0.3565926
+</code></pre>
+
+<pre><code class="r">inla.scale.model(R_area, constr = list(A = matrix(c(1, 1, 0, 0), ncol = 4), e = 3))
+</code></pre>
+
+<pre><code>## 4 x 4 sparse Matrix of class &quot;dgTMatrix&quot;
+##            a          b          c          d
+## a  0.7135650 -0.3567825 -0.3567825  .        
+## b -0.3567825  1.0703476 -0.3567825 -0.3567825
+## c -0.3567825 -0.3567825  0.7135650  .        
+## d  .         -0.3567825  .          0.3567825
+</code></pre>
+
+<h2>Default behaviour of <code>f(..., group = &lt;var&gt;)</code></h2>
+
+<p>Next we review the default behaviour of the grouping option to specify product
+smooths. The below fits a separable space-time model with an ICAR area effect
+and RW1 time effect, otherwise using defaults.</p>
+
+<pre><code class="r">fit &lt;- inla(y ~ 0 +
+              f(area, model = &quot;besag&quot;, graph = adj, hyper = hyper_area,
+                group = time, control.group = list(model = &quot;rw1&quot;)),
+            data = datanull, family = &quot;poisson&quot;,
+            control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+            control.fixed = list(mean.intercept = 0, prec.intercept = 1),
+            control.compute = list(config = TRUE))
+</code></pre>
+
+<h3>Default constraints for grouped models</h3>
+
+<ul>
+<li>By default, the a separate sum-to-zero constraint is specified for each level
+of the group variable.</li>
+</ul>
+
+<pre><code class="r">fit$misc$configs$constr
+</code></pre>
+
+<pre><code>## $nc
+## [1] 3
+## 
+## $A
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13] [,14] [,15]
+## [1,]    0    0    0    1    1    1    1    0    0     0     0     0     0     0     0
+## [2,]    0    0    0    0    0    0    0    1    1     1     1     0     0     0     0
+## [3,]    0    0    0    0    0    0    0    0    0     0     0     1     1     1     1
+## 
+## $e
+## [1] 0 0 0
+</code></pre>
+
+<ul>
+<li>If <code>extraconstr=</code> is specified, the constraint must be the length of the
+number of levels for the primary variable (e.g. 4 <code>area</code>s in the example
+below).</li>
+<li>This constraint is repeated for each level of the <code>group</code> variable.</li>
+</ul>
+
+<pre><code class="r">area_constr &lt;- list(A = matrix(c(1.5, 0.5, 0, 0), 1), e = 3)
+
+fit_alt_constr &lt;- inla(y ~ 0 +
+       f(area, model = &quot;besag&quot;, graph = adj, hyper = hyper_area,
+         group = time, control.group = list(model = &quot;rw1&quot;),
+         constr = FALSE, extraconstr = area_constr),
+     data = datanull, family = &quot;poisson&quot;,
+     control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+     control.fixed = list(mean.intercept = 0, prec.intercept = 1),
+     control.compute = list(config = TRUE))
+
+fit_alt_constr$misc$configs$constr
+</code></pre>
+
+<pre><code>## $nc
+## [1] 3
+## 
+## $A
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13] [,14] [,15]
+## [1,]    0    0    0  1.5  0.5    0    0  0.0  0.0     0     0   0.0   0.0     0     0
+## [2,]    0    0    0  0.0  0.0    0    0  1.5  0.5     0     0   0.0   0.0     0     0
+## [3,]    0    0    0  0.0  0.0    0    0  0.0  0.0     0     0   1.5   0.5     0     0
+## 
+## $e
+## [1] 3 3 3
+</code></pre>
+
+<p>As far as I can tell, there is no way to specify (1) a constraint for only
+some group levels, (2) different constraints for different group levels, or
+(3) constraints that span multiple group levels. For example, the following
+constraint with dimension 4 x 3 = 12 might be used to specify an overall
+sum-to-zero constraint (across all groups) on the space x time latent field.</p>
+
+<pre><code class="r">wishful_constr &lt;- list(A = matrix(1, ncol = 12), e = 0)
+wishful_constr
+</code></pre>
+
+<pre><code>## $A
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]
+## [1,]    1    1    1    1    1    1    1    1    1     1     1     1
+## 
+## $e
+## [1] 0
+</code></pre>
+
+<p>But this throws an error because INLA is expecting the constraint to have
+dimension 4 (the number of areas) and will repeat this constraint multiple
+times.</p>
+
+<pre><code class="r">inla(y ~ 0 +
+       f(area, model = &quot;besag&quot;, graph = adj, hyper = hyper_area,
+         group = time, control.group = list(model = &quot;rw1&quot;),
+         constr = FALSE,
+         extraconstr = wishful_constr),
+     data = datanull, family = &quot;poisson&quot;)
+</code></pre>
+
+<pre><code>## Error in inla.core(formula = formula, family = family, contrasts = contrasts,  : 
+##   
+##  ncol in matrix A(extraconstr) does not correspont to the length of f: 12 4
+## 
+##  *** inla.core.safe:  inla.program has crashed: rerun to get better initial values. try=1/2 
+## Error in inla.core(formula = formula, family = family, contrasts = contrasts,  : 
+##   
+##  ncol in matrix A(extraconstr) does not correspont to the length of f: 12 4
+## 
+##  *** inla.core.safe:  inla.program has crashed: rerun to get better initial values. try=2/2 
+## Error in inla.core(formula = formula, family = family, contrasts = contrasts,  : 
+##   
+##  ncol in matrix A(extraconstr) does not correspont to the length of f: 12 4
+</code></pre>
+
+<pre><code>## Error in inla.core.safe(formula = formula, family = family, contrasts = contrasts, : *** Fail to get good enough initial values. Maybe it is due to something else.
+</code></pre>
+
+<p>More flexible constraints should be possible by specifying custom model
+using the <code>&quot;rgeneric&quot;</code> model type and manually specifying the <code>Cmatrix</code>
+as the Kronecker product.</p>
+
+<h3>Model scaling with grouped models</h3>
+
+<ul>
+<li>The <code>control.group = list(...)</code> default for <code>scale.model</code> is
+<code>TRUE</code>, even when the default for <code>scale.model</code> is <code>FALSE</code>.</li>
+<li>The main term is not scaled, consistent with <code>f(..., scale.model = )</code> default.</li>
+</ul>
+
+<pre><code class="r">inla.getOption()$scale.model.default
+</code></pre>
+
+<pre><code>## [1] FALSE
+</code></pre>
+
+<p>Model with defaults for scale model</p>
+
+<pre><code class="r">fit &lt;- inla(y ~ 0 +
+             f(area, model = &quot;besag&quot;, graph = adj, hyper = hyper_area,
+               group = time, control.group = list(model = &quot;rw1&quot;)),
+            data = datanull, family = &quot;poisson&quot;,
+            control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+            control.fixed = list(mean.intercept = 0, prec.intercept = 1),
+            control.compute = list(config = TRUE))
+
+R_area_scaled &lt;- inla.scale.model(R_area,
+                                  constr = list(A = matrix(1, ncol = 4), e = 0))
+R_time_scaled &lt;- inla.scale.model(R_time,
+                                  constr = list(A = matrix(1, ncol = 3), e = 0))
+
+round(fit$misc$configs$config[[1]]$Q[-(1:3), -(1:3)], 5)
+</code></pre>
+
+<pre><code>## 12 x 12 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                                                                                                        
+##  [1,]  1e+06 -0.40934 -0.40934  .            -0.81867  0.40934  0.40934  .        .           .        .        .      
+##  [2,] .       1.22811 -0.40934 -0.40934       0.40934 -1.22801  0.40934  0.40934  .           .        .        .      
+##  [3,] .       .        0.81877  .             0.40934  0.40934 -0.81867  .        .           .        .        .      
+##  [4,] .       .        .        0.40944       .        0.40934  .       -0.40934  .           .        .        .      
+##  [5,] .       .        .        .       1000001.07948 -0.81867 -0.81867  .       -8.1867e-01  0.40934  0.40934  .      
+##  [6,] .       .        .        .             .        2.45612 -0.81867 -0.81867  4.0934e-01 -1.22801  0.40934  0.40934
+##  [7,] .       .        .        .             .        .        1.63745  .        4.0934e-01  0.40934 -0.81867  .      
+##  [8,] .       .        .        .             .        .        .        0.81877  .           0.40934  .       -0.40934
+##  [9,] .       .        .        .             .        .        .        .        1.0000e+06 -0.40934 -0.40934  .      
+## [10,] .       .        .        .             .        .        .        .        .           1.22811 -0.40934 -0.40934
+## [11,] .       .        .        .             .        .        .        .        .           .        0.81877  .      
+## [12,] .       .        .        .             .        .        .        .        .           .        .        0.40944
+</code></pre>
+
+<p>This matches the Kronecker product of the unscaled area structure matrix
+and scaled time structure matrix.</p>
+
+<pre><code class="r">kronecker(R_time_scaled, R_area)
+</code></pre>
+
+<pre><code>## 12 x 12 sparse Matrix of class &quot;dgTMatrix&quot;
+##                                                                                                                                          
+##  [1,]  0.8186736 -0.4093368 -0.4093368  .         -0.8186736  0.4093368  0.4093368  .          .          .          .          .        
+##  [2,] -0.4093368  1.2280105 -0.4093368 -0.4093368  0.4093368 -1.2280105  0.4093368  0.4093368  .          .          .          .        
+##  [3,] -0.4093368 -0.4093368  0.8186736  .          0.4093368  0.4093368 -0.8186736  .          .          .          .          .        
+##  [4,]  .         -0.4093368  .          0.4093368  .          0.4093368  .         -0.4093368  .          .          .          .        
+##  [5,] -0.8186736  0.4093368  0.4093368  .          1.6373473 -0.8186736 -0.8186736  .         -0.8186736  0.4093368  0.4093368  .        
+##  [6,]  0.4093368 -1.2280105  0.4093368  0.4093368 -0.8186736  2.4560209 -0.8186736 -0.8186736  0.4093368 -1.2280105  0.4093368  0.4093368
+##  [7,]  0.4093368  0.4093368 -0.8186736  .         -0.8186736 -0.8186736  1.6373473  .          0.4093368  0.4093368 -0.8186736  .        
+##  [8,]  .          0.4093368  .         -0.4093368  .         -0.8186736  .          0.8186736  .          0.4093368  .         -0.4093368
+##  [9,]  .          .          .          .         -0.8186736  0.4093368  0.4093368  .          0.8186736 -0.4093368 -0.4093368  .        
+## [10,]  .          .          .          .          0.4093368 -1.2280105  0.4093368  0.4093368 -0.4093368  1.2280105 -0.4093368 -0.4093368
+## [11,]  .          .          .          .          0.4093368  0.4093368 -0.8186736  .         -0.4093368 -0.4093368  0.8186736  .        
+## [12,]  .          .          .          .          .          0.4093368  .         -0.4093368  .         -0.4093368  .          0.4093368
+</code></pre>
+
+<p>Fit both scaled <code>f(..., scale.model = TRUE, ..., control.group = list(..., scale.model = TRUE))</code></p>
+
+<pre><code class="r">fit &lt;- inla(y ~ 0 +
+              f(area, model = &quot;besag&quot;, graph = adj, hyper = hyper_area,
+                scale.model = TRUE,
+                group = time,
+                control.group = list(model = &quot;rw1&quot;, scale.model = TRUE)),
+            data = datanull, family = &quot;poisson&quot;,
+            control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+            control.fixed = list(mean.intercept = 0, prec.intercept = 1),
+            control.compute = list(config = TRUE))
+
+round(fit$misc$configs$config[[1]]$Q[-(1:3), -(1:3)], 5)
+</code></pre>
+
+<pre><code>## 12 x 12 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                                                                                                         
+##  [1,] 999999.7 -0.14597 -0.14597  .       -2.9193e-01  0.14597  0.14597  .            .        .        .        .      
+##  [2,]      .    0.43800 -0.14597 -0.14597  1.4597e-01 -0.43790  0.14597  0.14597      .        .        .        .      
+##  [3,]      .    .        0.29203  .        1.4597e-01  0.14597 -0.29193  .            .        .        .        .      
+##  [4,]      .    .        .        0.14607  .           0.14597  .       -0.14597      .        .        .        .      
+##  [5,]      .    .        .        .        1.0000e+06 -0.29193 -0.29193  .           -0.29193  0.14597  0.14597  .      
+##  [6,]      .    .        .        .        .           0.87590 -0.29193 -0.29193      0.14597 -0.43790  0.14597  0.14597
+##  [7,]      .    .        .        .        .           .        0.58397  .            0.14597  0.14597 -0.29193  .      
+##  [8,]      .    .        .        .        .           .        .        0.29203      .        0.14597  .       -0.14597
+##  [9,]      .    .        .        .        .           .        .        .       999999.73407 -0.14597 -0.14597  .      
+## [10,]      .    .        .        .        .           .        .        .            .        0.43800 -0.14597 -0.14597
+## [11,]      .    .        .        .        .           .        .        .            .        .        0.29203  .      
+## [12,]      .    .        .        .        .           .        .        .            .        .        .        0.14607
+</code></pre>
+
+<pre><code class="r">round(kronecker(R_time_scaled, R_area_scaled), 5)
+</code></pre>
+
+<pre><code>## 12 x 12 sparse Matrix of class &quot;dgTMatrix&quot;
+##                                                                                                                  
+##  [1,]  0.29193 -0.14597 -0.14597  .       -0.29193  0.14597  0.14597  .        .        .        .        .      
+##  [2,] -0.14597  0.43790 -0.14597 -0.14597  0.14597 -0.43790  0.14597  0.14597  .        .        .        .      
+##  [3,] -0.14597 -0.14597  0.29193  .        0.14597  0.14597 -0.29193  .        .        .        .        .      
+##  [4,]  .       -0.14597  .        0.14597  .        0.14597  .       -0.14597  .        .        .        .      
+##  [5,] -0.29193  0.14597  0.14597  .        0.58387 -0.29193 -0.29193  .       -0.29193  0.14597  0.14597  .      
+##  [6,]  0.14597 -0.43790  0.14597  0.14597 -0.29193  0.87580 -0.29193 -0.29193  0.14597 -0.43790  0.14597  0.14597
+##  [7,]  0.14597  0.14597 -0.29193  .       -0.29193 -0.29193  0.58387  .        0.14597  0.14597 -0.29193  .      
+##  [8,]  .        0.14597  .       -0.14597  .       -0.29193  .        0.29193  .        0.14597  .       -0.14597
+##  [9,]  .        .        .        .       -0.29193  0.14597  0.14597  .        0.29193 -0.14597 -0.14597  .      
+## [10,]  .        .        .        .        0.14597 -0.43790  0.14597  0.14597 -0.14597  0.43790 -0.14597 -0.14597
+## [11,]  .        .        .        .        0.14597  0.14597 -0.29193  .       -0.14597 -0.14597  0.29193  .      
+## [12,]  .        .        .        .        .        0.14597  .       -0.14597  .       -0.14597  .        0.14597
+</code></pre>
+
+<p>Fit main effect scaled and group unscaled
+<code>f(..., scale.model = TRUE, ..., control.group = list(..., scale.model = FALSE))</code>.</p>
+
+<pre><code class="r">fit &lt;- inla(y ~ 0 +
+              f(area, model = &quot;besag&quot;, graph = adj, hyper = hyper_area,
+                scale.model = TRUE,
+                group = time,
+                control.group = list(model = &quot;rw1&quot;, scale.model = FALSE)),
+            data = datanull, family = &quot;poisson&quot;,
+            control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+            control.fixed = list(mean.intercept = 0, prec.intercept = 1),
+            control.compute = list(config = TRUE))
+
+round(fit$misc$configs$config[[1]]$Q[-(1:3), -(1:3)], 5)
+</code></pre>
+
+<pre><code>## 12 x 12 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                                                                                                        
+##  [1,]  1e+06 -0.35659 -0.35659  .            -0.71319  0.35659  0.35659  .        .           .        .        .      
+##  [2,] .       1.06988 -0.35659 -0.35659       0.35659 -1.06978  0.35659  0.35659  .           .        .        .      
+##  [3,] .       .        0.71329  .             0.35659  0.35659 -0.71319  .        .           .        .        .      
+##  [4,] .       .        .        0.35669       .        0.35659  .       -0.35659  .           .        .        .      
+##  [5,] .       .        .        .       1000000.86851 -0.71319 -0.71319  .       -7.1319e-01  0.35659  0.35659  .      
+##  [6,] .       .        .        .             .        2.13966 -0.71319 -0.71319  3.5659e-01 -1.06978  0.35659  0.35659
+##  [7,] .       .        .        .             .        .        1.42647  .        3.5659e-01  0.35659 -0.71319  .      
+##  [8,] .       .        .        .             .        .        .        0.71329  .           0.35659  .       -0.35659
+##  [9,] .       .        .        .             .        .        .        .        1.0000e+06 -0.35659 -0.35659  .      
+## [10,] .       .        .        .             .        .        .        .        .           1.06988 -0.35659 -0.35659
+## [11,] .       .        .        .             .        .        .        .        .           .        0.71329  .      
+## [12,] .       .        .        .             .        .        .        .        .           .        .        0.35669
+</code></pre>
+
+<pre><code class="r">round(kronecker(R_time, R_area_scaled), 5)
+</code></pre>
+
+<pre><code>## 12 x 12 sparse Matrix of class &quot;dgTMatrix&quot;
+##                                                                                                                  
+##  [1,]  0.71319 -0.35659 -0.35659  .       -0.71319  0.35659  0.35659  .        .        .        .        .      
+##  [2,] -0.35659  1.06978 -0.35659 -0.35659  0.35659 -1.06978  0.35659  0.35659  .        .        .        .      
+##  [3,] -0.35659 -0.35659  0.71319  .        0.35659  0.35659 -0.71319  .        .        .        .        .      
+##  [4,]  .       -0.35659  .        0.35659  .        0.35659  .       -0.35659  .        .        .        .      
+##  [5,] -0.71319  0.35659  0.35659  .        1.42637 -0.71319 -0.71319  .       -0.71319  0.35659  0.35659  .      
+##  [6,]  0.35659 -1.06978  0.35659  0.35659 -0.71319  2.13956 -0.71319 -0.71319  0.35659 -1.06978  0.35659  0.35659
+##  [7,]  0.35659  0.35659 -0.71319  .       -0.71319 -0.71319  1.42637  .        0.35659  0.35659 -0.71319  .      
+##  [8,]  .        0.35659  .       -0.35659  .       -0.71319  .        0.71319  .        0.35659  .       -0.35659
+##  [9,]  .        .        .        .       -0.71319  0.35659  0.35659  .        0.71319 -0.35659 -0.35659  .      
+## [10,]  .        .        .        .        0.35659 -1.06978  0.35659  0.35659 -0.35659  1.06978 -0.35659 -0.35659
+## [11,]  .        .        .        .        0.35659  0.35659 -0.71319  .       -0.35659 -0.35659  0.71319  .      
+## [12,]  .        .        .        .        .        0.35659  .       -0.35659  .       -0.35659  .        0.35659
+</code></pre>
+
+<h1>Confirm we can get the same thing by manually specifying <code>Cmatrix</code>.</h1>
+
+<pre><code class="r">fit &lt;- inla(y ~ 1 +
+              f(area, model = &quot;besag&quot;, graph = adj, hyper = hyper_area,
+                scale.model = TRUE,
+                group = time,
+                control.group = list(model = &quot;rw1&quot;, scale.model = FALSE)),
+            data = data, family = &quot;poisson&quot;,
+            control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+            control.compute = list(config = TRUE))
+
+
+Q &lt;- kronecker(R_time, R_area_scaled)
+data$area.time &lt;- 1:12
+
+A &lt;- rbind(rep(c(1, 0), c(4, 8)),
+           rep(c(0, 1, 0), c(4, 4, 4)),
+           rep(c(0, 1), c(8, 4)))
+e &lt;- c(0, 0, 0)
+
+
+diagval &lt;- INLA:::inla.set.f.default()$diagonal
+
+fitQ &lt;- inla(y ~ 1 +
+               f(area.time, model = &quot;generic0&quot;, Cmatrix = Q, hyper = hyper_area,
+                 diagonal = diagval, extraconstr = list(A = A, e = e)),
+             data = data, family = &quot;poisson&quot;,
+             control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+             control.compute = list(config = TRUE))
+</code></pre>
+
+<p>The effective parameters are equal:</p>
+
+<pre><code class="r">fit$neffp
+</code></pre>
+
+<pre><code>## NULL
+</code></pre>
+
+<pre><code class="r">fitQ$neffp
+</code></pre>
+
+<pre><code>## NULL
+</code></pre>
+
+<p>Fixed effect and random effects are equal:</p>
+
+<pre><code class="r">fit$summary.fixed[ , 1:2]
+</code></pre>
+
+<pre><code>##                  mean        sd
+## (Intercept) 0.8252044 0.1972415
+</code></pre>
+
+<pre><code class="r">fitQ$summary.fixed[ , 1:2]
+</code></pre>
+
+<pre><code>##                  mean        sd
+## (Intercept) 0.8252044 0.1972415
+</code></pre>
+
+<pre><code class="r">fit$summary.random[[1]][ , 1:3]
+</code></pre>
+
+<pre><code>##    ID         mean        sd
+## 1   1 -0.942146851 0.6243370
+## 2   2 -0.001390667 0.4842373
+## 3   3  0.242535939 0.4697237
+## 4   4  0.701001580 0.4345685
+## 5   1 -0.756237171 0.5427013
+## 6   2  0.250717347 0.4145099
+## 7   3  0.446469313 0.4143858
+## 8   4  0.059050525 0.4967450
+## 9   1  0.286358312 0.4684745
+## 10  2 -0.244035645 0.5024995
+## 11  3  0.100760647 0.4900411
+## 12  4 -0.143083331 0.5497780
+</code></pre>
+
+<pre><code class="r">fitQ$summary.random[[1]][ , 1:3]
+</code></pre>
+
+<pre><code>##    ID         mean        sd
+## 1   1 -0.942146852 0.6243370
+## 2   2 -0.001390667 0.4842373
+## 3   3  0.242535939 0.4697237
+## 4   4  0.701001581 0.4345685
+## 5   5 -0.756237173 0.5427013
+## 6   6  0.250717349 0.4145099
+## 7   7  0.446469314 0.4143858
+## 8   8  0.059050525 0.4967450
+## 9   9  0.286358314 0.4684745
+## 10 10 -0.244035646 0.5024995
+## 11 11  0.100760647 0.4900411
+## 12 12 -0.143083331 0.5497780
+</code></pre>
+
+<p>Marginal likelihood slightly different. Suspect difference in scaling constants?</p>
+
+<pre><code class="r">fit$mlik
+</code></pre>
+
+<pre><code>##                                           [,1]
+## log marginal-likelihood (integration) -23.1046
+## log marginal-likelihood (Gaussian)    -23.1046
+</code></pre>
+
+<pre><code class="r">fitQ$mlik
+</code></pre>
+
+<pre><code>##                                            [,1]
+## log marginal-likelihood (integration) -25.86141
+## log marginal-likelihood (Gaussian)    -25.86141
+</code></pre>
+
+<h1>The AR1 model</h1>
+
+<h2>Basic AR1 model</h2>
+
+<ul>
+<li>The raw AR1 structure matrix is scaled by \(1/(1-\rho^2)\) such that the marginal
+variance of the precision matrix is the specified precision.</li>
+</ul>
+
+<pre><code class="r">rho &lt;- 0.8
+</code></pre>
+
+<p>The AR1 precision matrix is given by</p>
+
+<pre><code class="r">R_ar1 &lt;- sparseMatrix(1:5, 1:5, x = 1)
+diag(R_ar1)[2:4] &lt;- 1 + rho^2
+R_ar1[cbind(1:4, 2:5)] &lt;- -rho
+R_ar1[cbind(2:5, 1:4)] &lt;- -rho
+</code></pre>
+
+<p>For a marginal precision of 1.0, scale the raw structure matrix:</p>
+
+<pre><code class="r">Q_ar1 &lt;- R_ar1 * 1 / (1 - rho^2)
+</code></pre>
+
+<p>Show this matches the Q matrix constructed by INLA</p>
+
+<pre><code class="r">hyper_ar1 &lt;- list(prec = list(initial = log(1), fixed = TRUE),
+                  rho = list(initial = log((1 + rho) / (1 - rho)), fixed = TRUE))
+
+fit &lt;- inla(y ~ 0 +
+              f(time, model = &quot;ar1&quot;, values = 1:5, hyper = hyper_ar1),
+            data = datanull[1, ], family = &quot;poisson&quot;,
+            control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+            control.fixed = list(mean.intercept = 0, prec.intercept = 1),
+            control.compute = list(config = TRUE))
+
+fit$misc$configs$config[[1]]$Q[-1, -1]
+</code></pre>
+
+<pre><code>## 5 x 5 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                                     
+## [1,] 1000002 -2.222223  .         .         .       
+## [2,]       .  4.555557 -2.222223  .         .       
+## [3,]       .  .         4.555557 -2.222223  .       
+## [4,]       .  .         .         4.555557 -2.222223
+## [5,]       .  .         .         .         2.777779
+</code></pre>
+
+<pre><code class="r">Q_ar1
+</code></pre>
+
+<pre><code>## 5 x 5 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                                       
+## [1,]  2.777778 -2.222222  .         .         .       
+## [2,] -2.222222  4.555556 -2.222222  .         .       
+## [3,]  .        -2.222222  4.555556 -2.222222  .       
+## [4,]  .         .        -2.222222  4.555556 -2.222222
+## [5,]  .         .         .        -2.222222  2.777778
+</code></pre>
+
+<h2>ICAR x AR1 interaction</h2>
+
+<p>Three time points</p>
+
+<pre><code class="r">R_ar1 &lt;- sparseMatrix(1:3, 1:3, x = 1)
+diag(R_ar1)[2] &lt;- 1 + rho^2
+R_ar1[cbind(1:2, 2:3)] &lt;- -rho
+R_ar1[cbind(2:3, 1:2)] &lt;- -rho
+
+Q_ar1 &lt;- R_ar1 * 1 / (1 - rho^2)
+
+fit &lt;- inla(y ~ 0 +
+              f(area, model = &quot;besag&quot;, graph = adj, hyper = hyper_area,
+                group = time,
+                control.group = list(model = &quot;ar1&quot;, hyper = hyper_ar1[&quot;rho&quot;])),
+            data = datanull, family = &quot;poisson&quot;,
+            control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+            control.fixed = list(mean.intercept = 0, prec.intercept = 1),
+            control.compute = list(config = TRUE))
+
+round(fit$misc$configs$config[[1]]$Q[-(1:3), -(1:3)], 5)
+</code></pre>
+
+<pre><code>## 12 x 12 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                                                                                                           
+##  [1,] 1000005 -2.77778 -2.77778  .            -4.44445  2.22222  2.22222  .             .        .        .        .      
+##  [2,]       .  8.33344 -2.77778 -2.77778       2.22222 -6.66667  2.22222  2.22222       .        .        .        .      
+##  [3,]       .  .        5.55566  .             2.22222  2.22222 -4.44445  .             .        .        .        .      
+##  [4,]       .  .        .        2.77788       .        2.22222  .       -2.22222       .        .        .        .      
+##  [5,]       .  .        .        .       1000008.55325 -4.55556 -4.55556  .            -4.44445  2.22222  2.22222  .      
+##  [6,]       .  .        .        .             .       13.66677 -4.55556 -4.55556       2.22222 -6.66667  2.22222  2.22222
+##  [7,]       .  .        .        .             .        .        9.11121  .             2.22222  2.22222 -4.44445  .      
+##  [8,]       .  .        .        .             .        .        .        4.55566       .        2.22222  .       -2.22222
+##  [9,]       .  .        .        .             .        .        .        .       1000004.99769 -2.77778 -2.77778  .      
+## [10,]       .  .        .        .             .        .        .        .             .        8.33344 -2.77778 -2.77778
+## [11,]       .  .        .        .             .        .        .        .             .        .        5.55566  .      
+## [12,]       .  .        .        .             .        .        .        .             .        .        .        2.77788
+</code></pre>
+
+<pre><code class="r">kronecker(Q_ar1, R_area)
+</code></pre>
+
+<pre><code>## 12 x 12 sparse Matrix of class &quot;dgTMatrix&quot;
+##                                                                                                                              
+##  [1,]  5.555556 -2.777778 -2.777778  .        -4.444444  2.222222  2.222222  .         .         .         .         .       
+##  [2,] -2.777778  8.333333 -2.777778 -2.777778  2.222222 -6.666667  2.222222  2.222222  .         .         .         .       
+##  [3,] -2.777778 -2.777778  5.555556  .         2.222222  2.222222 -4.444444  .         .         .         .         .       
+##  [4,]  .        -2.777778  .         2.777778  .         2.222222  .        -2.222222  .         .         .         .       
+##  [5,] -4.444444  2.222222  2.222222  .         9.111111 -4.555556 -4.555556  .        -4.444444  2.222222  2.222222  .       
+##  [6,]  2.222222 -6.666667  2.222222  2.222222 -4.555556 13.666667 -4.555556 -4.555556  2.222222 -6.666667  2.222222  2.222222
+##  [7,]  2.222222  2.222222 -4.444444  .        -4.555556 -4.555556  9.111111  .         2.222222  2.222222 -4.444444  .       
+##  [8,]  .         2.222222  .        -2.222222  .        -4.555556  .         4.555556  .         2.222222  .        -2.222222
+##  [9,]  .         .         .         .        -4.444444  2.222222  2.222222  .         5.555556 -2.777778 -2.777778  .       
+## [10,]  .         .         .         .         2.222222 -6.666667  2.222222  2.222222 -2.777778  8.333333 -2.777778 -2.777778
+## [11,]  .         .         .         .         2.222222  2.222222 -4.444444  .        -2.777778 -2.777778  5.555556  .       
+## [12,]  .         .         .         .         .         2.222222  .        -2.222222  .        -2.777778  .         2.777778
+</code></pre>
+
+<h2>ICAR x AR1 interaction with <code>scale.model = TRUE</code></h2>
+
+<pre><code class="r">fit &lt;- inla(y ~ 0 +
+              f(area, model = &quot;besag&quot;, graph = adj, hyper = hyper_area,
+                scale.model = TRUE,
+                group = time,
+                control.group = list(model = &quot;ar1&quot;, hyper = hyper_ar1[&quot;rho&quot;])),
+            data = datanull, family = &quot;poisson&quot;,
+            control.inla = list(strategy = &quot;gaussian&quot;, int.strategy = &quot;eb&quot;),
+            control.fixed = list(mean.intercept = 0, prec.intercept = 1),
+            control.compute = list(config = TRUE))
+
+round(fit$misc$configs$config[[1]]$Q[-(1:3), -(1:3)], 5)
+</code></pre>
+
+<pre><code>## 12 x 12 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                                                                                                           
+##  [1,] 1000001 -0.99054 -0.99054  .            -1.58486  0.79243  0.79243  .             .        .        .        .      
+##  [2,]       .  2.97171 -0.99054 -0.99054       0.79243 -2.37729  0.79243  0.79243       .        .        .        .      
+##  [3,]       .  .        1.98117  .             0.79243  0.79243 -1.58486  .             .        .        .        .      
+##  [4,]       .  .        .        0.99064       .        0.79243  .       -0.79243       .        .        .        .      
+##  [5,]       .  .        .        .       1000002.69109 -1.62448 -1.62448  .            -1.58486  0.79243  0.79243  .      
+##  [6,]       .  .        .        .             .        4.87353 -1.62448 -1.62448       0.79243 -2.37729  0.79243  0.79243
+##  [7,]       .  .        .        .             .        .        3.24906  .             0.79243  0.79243 -1.58486  .      
+##  [8,]       .  .        .        .             .        .        .        1.62458       .        0.79243  .       -0.79243
+##  [9,]       .  .        .        .             .        .        .        .       1000001.42321 -0.99054 -0.99054  .      
+## [10,]       .  .        .        .             .        .        .        .             .        2.97171 -0.99054 -0.99054
+## [11,]       .  .        .        .             .        .        .        .             .        .        1.98117  .      
+## [12,]       .  .        .        .             .        .        .        .             .        .        .        0.99064
+</code></pre>
+
+<pre><code class="r">round(kronecker(Q_ar1, R_area_scaled), 5)
+</code></pre>
+
+<pre><code>## 12 x 12 sparse Matrix of class &quot;dgTMatrix&quot;
+##                                                                                                                  
+##  [1,]  1.98107 -0.99053 -0.99053  .       -1.58486  0.79243  0.79243  .        .        .        .        .      
+##  [2,] -0.99053  2.97160 -0.99053 -0.99053  0.79243 -2.37728  0.79243  0.79243  .        .        .        .      
+##  [3,] -0.99053 -0.99053  1.98107  .        0.79243  0.79243 -1.58486  .        .        .        .        .      
+##  [4,]  .       -0.99053  .        0.99053  .        0.79243  .       -0.79243  .        .        .        .      
+##  [5,] -1.58486  0.79243  0.79243  .        3.24895 -1.62448 -1.62448  .       -1.58486  0.79243  0.79243  .      
+##  [6,]  0.79243 -2.37728  0.79243  0.79243 -1.62448  4.87343 -1.62448 -1.62448  0.79243 -2.37728  0.79243  0.79243
+##  [7,]  0.79243  0.79243 -1.58486  .       -1.62448 -1.62448  3.24895  .        0.79243  0.79243 -1.58486  .      
+##  [8,]  .        0.79243  .       -0.79243  .       -1.62448  .        1.62448  .        0.79243  .       -0.79243
+##  [9,]  .        .        .        .       -1.58486  0.79243  0.79243  .        1.98107 -0.99053 -0.99053  .      
+## [10,]  .        .        .        .        0.79243 -2.37728  0.79243  0.79243 -0.99053  2.97160 -0.99053 -0.99053
+## [11,]  .        .        .        .        0.79243  0.79243 -1.58486  .       -0.99053 -0.99053  1.98107  .      
+## [12,]  .        .        .        .        .        0.79243  .       -0.79243  .       -0.99053  .        0.99053
+</code></pre>
+
+<h1><code>sessionInfo()</code></h1>
+
+<pre><code class="r">sessionInfo()
+</code></pre>
+
+<pre><code>## R version 4.2.0 (2022-04-22)
+## Platform: x86_64-apple-darwin17.0 (64-bit)
+## Running under: macOS Monterey 12.6
+## 
+## Matrix products: default
+## LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+## 
+## attached base packages:
+## [1] parallel  stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] INLA_22.05.07 sp_1.4-7      foreach_1.5.2 Matrix_1.4-1 
+## 
+## loaded via a namespace (and not attached):
+##  [1] lattice_0.20-45    codetools_0.2-18   grid_4.2.0         MatrixModels_0.5-0 magrittr_2.0.3     evaluate_0.15      highr_0.9          stringi_1.7.6      splines_4.2.0      iterators_1.0.14   tools_4.2.0        TMB_1.9.1         
+## [13] stringr_1.4.0      markdown_1.1       xfun_0.31          compiler_4.2.0     knitr_1.39
+</code></pre>
+
+</body>
+
+</html>
