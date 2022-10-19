@@ -64,7 +64,7 @@ $$
 $$
 Thus a large step for the hyperparameters will affect the the value for the linear predictor $\mu_i$, potentially moving it far away from the optimal parameters.
 
-If the random effect $x_i$ is directly parameterised as in the `R-INLA` implementation, for example $\mu_i = \beta_0 + x_i,$ the starting value for $\mu_i$ is unchanged by the updated hyperparamters.
+If the random effect $x_i$ is directly parameterised as in the `R-INLA` implementation, for example $\mu_i = \beta_0 + x_i,$ the starting value for $\mu_i$ is unchanged by the updated hyperparameters.
 This change in parameterisation does not change the model (_i.e._ the inference for hyperparameters does not change), but the inner optimisation step may be more efficient by starting at parameter values closer to the final values.
 
 ## Implementing the sparsity preserving parameterisation in `TMB`
@@ -284,11 +284,11 @@ The `TMB` model template `mod2` below implements the `R-INLA` parameterisation
 of the same model described in Section 3.4 of Reibler et al.:
 $$
 \begin{align}
-y_i \sim \mathrm{Poisson}(\eta_i)
-\log \eta_i = \beta_0 + \beta_1 \cdot x + b_i + \log E_i
-(\mathbf{b}, \mathbf{u}) \sim N(0, \mathbf{\Sigma}(\sigma, \phi))
-\sigma \sim N^{+}(0, 1)
-\phi \sim \mathrm{Beta}(0.5, 0.5)
+y_i &\sim \mathrm{Poisson}(\eta_i) \\
+\log \eta_i &= \beta_0 + \beta_1 \cdot x + b_i + \log E_i \\
+(\mathbf{b}, \mathbf{u}) &\sim N(0, \mathbf{\Sigma}(\sigma, \phi)) \\
+\sigma &\sim N^{+}(0, 1) \\
+\phi &\sim \mathrm{Beta}(0.5, 0.5)
 \end{align}
 $$
 where the precision matrix $\mathbf{\Sigma}^{-1}(\sigma, \phi)$ is as defined above.

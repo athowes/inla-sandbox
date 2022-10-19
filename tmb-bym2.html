@@ -2940,7 +2940,7 @@ Using the conventional parameterisation from the Morris tutorial, the linear pre
 \mu_i = \beta_0 + \sigma\cdot\left(\sqrt{\phi}\cdot u_i + \sqrt{1-\phi}\cdot v_i\right).
 \]</span>
 Thus a large step for the hyperparameters will affect the the value for the linear predictor <span class="math inline">\(\mu_i\)</span>, potentially moving it far away from the optimal parameters.</p>
-<p>If the random effect <span class="math inline">\(x_i\)</span> is directly parameterised as in the <code>R-INLA</code> implementation, for example <span class="math inline">\(\mu_i = \beta_0 + x_i,\)</span> the starting value for <span class="math inline">\(\mu_i\)</span> is unchanged by the updated hyperparamters.
+<p>If the random effect <span class="math inline">\(x_i\)</span> is directly parameterised as in the <code>R-INLA</code> implementation, for example <span class="math inline">\(\mu_i = \beta_0 + x_i,\)</span> the starting value for <span class="math inline">\(\mu_i\)</span> is unchanged by the updated hyperparameters.
 This change in parameterisation does not change the model (<em>i.e.</em> the inference for hyperparameters does not change), but the inner optimisation step may be more efficient by starting at parameter values closer to the final values.</p>
 </div>
 <div id="implementing-the-sparsity-preserving-parameterisation-in-tmb" class="section level2" number="1.2">
@@ -3036,7 +3036,7 @@ y_i &amp;\sim \mathrm{Poisson}(\eta_i) \\
 \end{align}
 \]</span></p>
 <pre class="r"><code>mod1 &lt;- &#39;
-#include &lt;tmb.hpp&gt;
+#include &lt;TMB.hpp&gt;
 
 template&lt;class Type&gt;
 Type objective_function&lt;Type&gt;::operator() ()
@@ -3120,16 +3120,16 @@ sdr1 &lt;- TMB::sdreport(obj1)</code></pre>
 of the same model described in Section 3.4 of Reibler et al.:
 <span class="math display">\[
 \begin{align}
-y_i \sim \mathrm{Poisson}(\eta_i)
-\log \eta_i = \beta_0 + \beta_1 \cdot x + b_i + \log E_i
-(\mathbf{b}, \mathbf{u}) \sim N(0, \mathbf{\Sigma}(\sigma, \phi))
-\sigma \sim N^{+}(0, 1)
-\phi \sim \mathrm{Beta}(0.5, 0.5)
+y_i &amp;\sim \mathrm{Poisson}(\eta_i) \\
+\log \eta_i &amp;= \beta_0 + \beta_1 \cdot x + b_i + \log E_i \\
+(\mathbf{b}, \mathbf{u}) &amp;\sim N(0, \mathbf{\Sigma}(\sigma, \phi)) \\
+\sigma &amp;\sim N^{+}(0, 1) \\
+\phi &amp;\sim \mathrm{Beta}(0.5, 0.5)
 \end{align}
 \]</span>
 where the precision matrix <span class="math inline">\(\mathbf{\Sigma}^{-1}(\sigma, \phi)\)</span> is as defined above.</p>
 <pre class="r"><code>mod2 &lt;- &#39;
-#include &lt;tmb.hpp&gt;
+#include &lt;TMB.hpp&gt;
 
 template&lt;class Type&gt;
 Type objective_function&lt;Type&gt;::operator() ()
@@ -3262,7 +3262,7 @@ The posterior standard deviations are highly correlated but slightly larger for 
 inla_full$summary.fixed</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mean"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["0.025quant"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["0.5quant"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["0.975quant"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["mode"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["kld"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"-0.220723","2":"0.1258618","3":"-0.4686618","4":"-0.2206420","5":"0.02662975","6":"NA","7":"3.753082e-08","_rn_":"(Intercept)"},{"1":"0.369738","2":"0.1313102","3":"0.1063977","4":"0.3715202","5":"0.62314474","6":"NA","7":"2.846275e-08","_rn_":"x"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mean"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["0.025quant"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["0.5quant"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["0.975quant"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["mode"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["kld"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"-0.2206922","2":"0.1257537","3":"-0.4683835","4":"-0.2206250","5":"0.02648608","6":"NA","7":"3.755622e-08","_rn_":"(Intercept)"},{"1":"0.3697554","2":"0.1312118","3":"0.1065741","4":"0.3715513","5":"0.62293530","6":"NA","7":"2.860152e-08","_rn_":"x"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>inla_full$internal.summary.hyperpar</code></pre>
@@ -3278,46 +3278,46 @@ stanfit1 &lt;- tmbstan(obj1, refresh = 0)
 stanfit2 &lt;- tmbstan(obj2, refresh = 0)
 
 print(stanfit1, digits = 3, par = c(&quot;beta0&quot;, &quot;beta1&quot;, &quot;log_sigma&quot;, &quot;logit_phi&quot;, &quot;lp__&quot;))</code></pre>
-<pre><code>## Inference for Stan model: file13b7fe8b8dd.
+<pre><code>## Inference for Stan model: file18022163e345.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##               mean se_mean    sd     2.5%      25%      50%      75%    97.5%
-## beta0       -0.220   0.004 0.129   -0.478   -0.304   -0.219   -0.135    0.031
-## beta1        0.368   0.004 0.135    0.100    0.278    0.369    0.460    0.625
-## log_sigma   -0.676   0.006 0.165   -0.991   -0.790   -0.681   -0.566   -0.343
-## logit_phi    3.134   0.095 2.239    0.040    1.573    2.678    4.153    8.744
-## lp__      -243.589   0.262 8.867 -261.432 -249.554 -243.295 -237.521 -227.020
+## beta0       -0.220   0.003 0.124   -0.468   -0.301   -0.219   -0.137    0.024
+## beta1        0.368   0.004 0.129    0.108    0.283    0.369    0.454    0.631
+## log_sigma   -0.678   0.007 0.160   -0.996   -0.783   -0.678   -0.574   -0.358
+## logit_phi    3.110   0.094 2.267   -0.165    1.536    2.706    4.224    8.825
+## lp__      -243.431   0.281 8.889 -261.710 -249.285 -243.222 -237.306 -226.838
 ##           n_eff  Rhat
-## beta0      1257 1.005
-## beta1      1146 1.005
-## log_sigma   795 1.003
-## logit_phi   560 1.005
-## lp__       1148 1.000
+## beta0      1283 1.001
+## beta1      1121 1.002
+## log_sigma   489 1.013
+## logit_phi   581 1.009
+## lp__       1003 1.000
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Oct 19 13:26:18 2022.
+## Samples were drawn using NUTS(diag_e) at Wed Oct 19 13:48:51 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
 <pre class="r"><code>print(stanfit2, digits = 3, par = c(&quot;beta0&quot;, &quot;beta1&quot;, &quot;log_sigma&quot;, &quot;logit_phi&quot;, &quot;lp__&quot;))</code></pre>
-<pre><code>## Inference for Stan model: file13b74df729fa.
+<pre><code>## Inference for Stan model: file180224432a09.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
-##              mean se_mean     sd     2.5%      25%     50%     75%  97.5% n_eff
-## beta0      -0.223   0.003  0.128   -0.472   -0.310  -0.223  -0.135  0.027  1704
-## beta1       0.373   0.004  0.134    0.099    0.283   0.377   0.465  0.626  1383
-## log_sigma  -0.680   0.004  0.166   -0.999   -0.794  -0.680  -0.568 -0.360  1515
-## logit_phi   2.319   0.223  1.468   -0.316    1.245   2.203   3.304  5.311    44
-## lp__      -83.343   5.407 35.045 -137.178 -109.781 -88.806 -60.560 -7.851    42
-##            Rhat
-## beta0     1.002
-## beta1     1.004
-## log_sigma 1.001
-## logit_phi 1.152
-## lp__      1.152
+##              mean se_mean     sd     2.5%      25%     50%     75%   97.5%
+## beta0      -0.223   0.003  0.128   -0.474   -0.310  -0.224  -0.138   0.023
+## beta1       0.373   0.004  0.133    0.103    0.286   0.378   0.460   0.627
+## log_sigma  -0.678   0.004  0.162   -1.003   -0.786  -0.675  -0.573  -0.359
+## logit_phi   2.410   0.165  1.338   -0.085    1.467   2.363   3.299   5.017
+## lp__      -81.471   4.016 31.951 -135.900 -105.626 -83.772 -60.819 -14.913
+##           n_eff  Rhat
+## beta0      1547 1.002
+## beta1      1378 1.003
+## log_sigma  1519 1.001
+## logit_phi    66 1.063
+## lp__         63 1.069
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Oct 19 13:27:12 2022.
+## Samples were drawn using NUTS(diag_e) at Wed Oct 19 13:49:46 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
