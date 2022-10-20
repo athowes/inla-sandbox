@@ -1,4 +1,4 @@
-knitr::spin("arima110-inla-rgeneric.R")
-knitr::render("inla-internals.Rmd")
-knitr::render("inla-tmb-constraints.Rmd")
-knitr::render("tmb-bym2.Rmd")
+rmarkdown::render("arima110-inla-rgeneric.Rmd")
+rmarkdown::render("inla-internals.Rmd")
+rmarkdown::render("inla-tmb-constraints.Rmd")
+rmarkdown::render("tmb-bym2.Rmd")

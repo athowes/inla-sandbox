@@ -1,16 +1,36 @@
+---
+title: "Implementing the $\\text{ARIMA}(1, 1, 0)$ model using `rgeneric`"
+author:
+- name: Jeff Eaton (jeffrey.eaton@imperial.ac.uk)
+output:
+  bookdown::html_document2:
+    toc: yes
+    toc_float: yes
+    toc_collapsed: yes
+    df_print: paged
+    code_folding: show
+    theme: lumen
+abstract: |
+  To write!
+---
+
+```{r}
 library(INLA)
 library(Matrix)
 library(ggplot2)
 library(dplyr)
 library(forcats)
+```
 
-#' ## INLA AR(1) example using rgeneric.
-#' From https://inla.r-inla-download.org/r-inla.org/doc/vignettes/rgeneric.pdf.
-#'
+# `R-INLA` $\text{AR}(1)$ example using `rgeneric`
 
-inla.rgeneric.ar1.model <- function(cmd = c("graph", "Q", "mu", "initial", "log.norm.const",
-                                            "log.prior", "quit"),
-                                    theta = NULL) {
+From https://inla.r-inla-download.org/r-inla.org/doc/vignettes/rgeneric.pdf.
+
+
+```{r}
+inla.rgeneric.ar1.model <- function(
+    cmd = c("graph", "Q", "mu", "initial", "log.norm.const", "log.prior", "quit"),
+    theta = NULL) {
 
   ## for reference and potential storage for objects to
   ## cache, this is the environment of this function
@@ -21,6 +41,7 @@ inla.rgeneric.ar1.model <- function(cmd = c("graph", "Q", "mu", "initial", "log.
     return(list(prec = exp(theta[1L]),
                 rho = 2 * exp(theta[2L])/(1 + exp(theta[2L])) - 1))
   }
+  
   envir = parent.env(environment())
   
   graph = function(){ return (Q()) }
@@ -58,7 +79,6 @@ inla.rgeneric.ar1.model <- function(cmd = c("graph", "Q", "mu", "initial", "log.
 
   quit = function() { return (invisible()) }
 
-  
   ## sometimes this is useful, as argument 'graph' and 'quit'
   ## will pass theta=numeric(0) (or NULL in R-3.6...) as
   ## the values of theta are NOT
@@ -70,7 +90,6 @@ inla.rgeneric.ar1.model <- function(cmd = c("graph", "Q", "mu", "initial", "log.
   return (val)
 }
 
-
 n <- 100
 rho <- 0.9
 x <- arima.sim(n, model = list(ar = rho)) * sqrt(1-rho^2)
@@ -81,7 +100,6 @@ r <- inla(formula, data = data.frame(y, idx = 1:n))
 
 summary(r)
 
-
 fformula = y ~ -1 +
   f(idx, model = "ar1",
     hyper = list(prec = list(prior = "loggamma", param = c(1,1)),
@@ -89,15 +107,15 @@ fformula = y ~ -1 +
 
 rr = inla(fformula, data = data.frame(y, idx = 1:n))
 
-
 plot(inla.smarginal(rr$marginals.hyperpar[[2]]),
      type="l", lwd=5, col="red", xlab="stdev", ylab="density")
+
 lines(inla.tmarginal(exp, r$internal.marginals.hyperpar[[2]]),
       col="yellow")
 
-
 plot(inla.smarginal(rr$marginals.hyperpar[[3]]),
      type="l", lwd=5, col="red", xlab="rho", ylab="density")
+
 lines(inla.tmarginal(function(x) 2*exp(x)/(1+exp(x))-1,
                      r$internal.marginals.hyperpar[[3]]),
       col="yellow")
@@ -105,24 +123,19 @@ lines(inla.tmarginal(function(x) 2*exp(x)/(1+exp(x))-1,
 round(rbind(native = rr$cpu.used,
             rgeneric = r$cpu.used), digits = 3)
 
+```
 
-#' ## ARIMA(1, 1, 0)
-#'
-#' $\alpha ~ ARIMA(1, 1, 0)$ is equivalent to $\gamma ~ AR(1)$
-#' where $\gamma = D\alpha$ and D is the first order difference
-#' matrix.
-#'
-#' Let Q~ be the AR(1) precision matrix. Then
-#' $\gamma' Q~ \gamma = \alpha' D' Q~ D \alpha$.
-#'
-#' Thus precision matrix for ARIMA(1, 1, 0) is simly $Q = D' Q~ D$.
-#'
-#' det(Q) = n * det(Q~).  I don't know why yet...
-#'
-#' The normalising constant has coefficient n-1.
-#' 
+# `R-INLA` $\text{ARIMA}(1, 1, 0)$ using `rgeneric`
 
+$\alpha \sim \text{ARIMA}(1, 1, 0)$ is equivalent to $\gamma ~ AR(1)$ where $\gamma = D\alpha$ and $D$ is the first order difference matrix.
+Let $\tilde Q$ be the $\text{AR}(1)$ precision matrix.
+Then $\gamma' \tilde Q \gamma = \alpha' D' \tilde Q D \alpha$.
+Thus the precision matrix for $\text{ARIMA}(1, 1, 0)$ is simply $Q = D' \tilde Q D$.
+$\det(Q) = n \det(\tilde Q)$. 
+I don't know why yet...
+The normalising constant has coefficient $n - 1$.
 
+```{r}
 inla.rgeneric.arima110.model <- function(cmd = c("graph", "Q", "mu", "initial",
                                                  "log.norm.const", "log.prior", "quit"),
                                          theta = NULL) {
@@ -185,7 +198,6 @@ inla.rgeneric.arima110.model <- function(cmd = c("graph", "Q", "mu", "initial",
 
   quit = function() { return (invisible()) }
 
-  
   ## sometimes this is useful, as argument 'graph' and 'quit'
   ## will pass theta=numeric(0) (or NULL in R-3.6...) as
   ## the values of theta are NOT
@@ -196,29 +208,37 @@ inla.rgeneric.arima110.model <- function(cmd = c("graph", "Q", "mu", "initial",
   val = do.call(match.arg(cmd), args = list())
   return (val)
 }
+```
 
+Simulate data
 
-#' Simulate data
-
+```{r}
 set.seed(1)
 
 n <- 100
 rho <- 0.8
 c <- 0.3
+```
 
-#' The parameter `mean = <>` to `arima.sim()` passes a mean value to `rnorm()` used to
-#' simulate the innovations. To obtain a process with marginal slope `c`, pass the
-#' value `mean = c * (1 - rho) / sqrt(1-rho^2)`.
+The parameter `mean = <>` to `arima.sim()` passes a mean value to `rnorm()` used to simulate the innovations.
+To obtain a process with marginal slope `c`, pass the value `mean = c * (1 - rho) / sqrt(1 - rho^2)`.
 
-x <- arima.sim(n, model = list(order = c(1, 1, 0), ar = rho), mean = c * (1 - rho) / sqrt(1-rho^2))
-x <- x[-1] * sqrt(1-rho^2)
+```{r}
+x <- arima.sim(n, model = list(order = c(1, 1, 0), ar = rho), mean = c * (1 - rho) / sqrt(1 - rho^2))
+x <- x[-1] * sqrt(1 - rho^2)
 
 y <- x + rnorm(n, sd = 0.1)
+```
 
-#' Define INLA ARIMA(1,1,0) model object
+Define `R-INLA` $\text{ARIMA}(1,1,0)$ model object.
+
+```{r}
 arima110_model <- inla.rgeneric.define(inla.rgeneric.arima110.model, n = n)
-                                       
-#' Fit INLA model to full data
+```
+
+Fit `R-INLA` model to full data
+
+```{r}
 formula <- y ~ idx_lin + f(idx, model = arima110_model, constr = TRUE)
 fit <- inla(formula, data = data.frame(y, idx_lin = 1:n, idx = 1:n),
             control.predictor = list(compute = TRUE))
@@ -231,10 +251,11 @@ fit$summary.fitted.values %>%
   geom_ribbon(color = NA, alpha = 0.3) +
   geom_line() +
   geom_point(aes(y = y), color = "red3")
+```
 
+Truncate last 25% projection data
 
-#' Truncate last 25% projection data
-
+```{r}
 y_trunc <- y
 y_trunc[round(n*0.75):n] <- NA
 
@@ -250,15 +271,16 @@ fit_trunc$summary.fitted.values %>%
   geom_ribbon(color = NA, alpha = 0.3) +
   geom_line() +
   geom_point(aes(y = y), color = "red3")
+```
 
+## Compare ARIMA(1,1,0) + c with other models
 
-#' ## Compare ARIMA(1,1,0) + c with other models
-#'
-#' * ARIMA(1, 1, 0) [no constant]
-#' * RW(2)
-#' * AR(2)
-#' * AR(2) + c
+* $\text{ARIMA}(1, 1, 0)$ (no constant)
+* $\text{RW}(2)$
+* $\text{AR}(2)$
+* $\text{AR}(2) + c$
 
+```{r}
 fit_arima110 <- inla(y_trunc ~ f(idx,  model = arima110_model, constr = TRUE),
                      data = data.frame(y_trunc, idx_lin = 1:n, idx = 1:n),
                      control.predictor = list(compute = TRUE),
@@ -294,3 +316,10 @@ fitted_all %>%
              data = data.frame(idx = seq_along(y), y)) +
   scale_color_brewer(palette = "Set1") +
   scale_fill_brewer(palette = "Set1")
+```
+
+# Original computing environment
+
+```{r}
+sessionInfo()
+```
