@@ -103,7 +103,7 @@ brain.st2 <- inla(Observed ~ 1 +
                   control.predictor = list(compute = TRUE, link = 1))
 ```
 
-## Model 1: intercept only
+# Model 1: intercept only
 
 `R-INLA` default is a improper flat prior on the intercept
 
@@ -161,7 +161,7 @@ summary(inlafit)
 inlafit$summary.fixed
 ```
 
-## Model 2: ICAR model
+# Model 2: ICAR model
 
 ```{r}
 mod <- '
@@ -260,7 +260,7 @@ plot(inlafit$summary.random[[1]][ , 3], summary(sdr2, "random")[-1, 2])
 abline(0, 1, col = "red")
 ```
 
-#### INLA with custom Cmatrix
+### INLA with custom Cmatrix
 
 ```{r}
 diagval <- INLA:::inla.set.f.default()$diagonal
@@ -285,7 +285,7 @@ By setting `constr = TRUE` above, INLA infers the rank deficiency of one for the
 grep("rank", inlafitC$logfile, value = TRUE)
 ```
 
-#### With `constr = FALSE`
+### With `constr = FALSE`
 
 If I change `constr = FALSE`, for the ICAR model `R-INLA` still calculates the rank deficiency of 1 based on the number of connected components of the graph.
 But for the `"generic0"` version, `R-INLA` no longer detects rank deficiency of the `Cmatrix`.
@@ -330,7 +330,7 @@ summary(inlafit_unconstr)
 summary(inlafitC_unconstr)
 ```
 
-#### MRF in `mgcv`
+### MRF in `mgcv`
 
 ```{r}
 rownames(Q) <- colnames(Q) <- levels(data$IDf)
@@ -347,7 +347,7 @@ sm_abs <- smoothCon(s(IDf, bs = "mrf", xt = list(penalty = as.matrix(Q))), data,
 vcov(mgcvfit2)
 ```
 
-### Model 2b: express as `TMB` GMRF
+## Model 2b: express as `TMB` GMRF
 
 ```{r}
 mod <- '
@@ -452,7 +452,7 @@ plot(summary(sdr2, "random")[-1, 2], summary(sdr2b, "random")[-1, 2])
 abline(0, 1, col = "red")
 ```
 
-### Model 2c: non-centered parameterisation
+## Model 2c: non-centered parameterisation
 
 ```{r}
 mod <- '
@@ -555,7 +555,7 @@ plot(summary(sdr2, "random")[-1 , 2], summary(sdr2c, "report")[ , 2])
 abline(0, 1, col = "red")
 ```
 
-### Model 2d: explicit sum-to-zero constraint
+## Model 2d: explicit sum-to-zero constraint
 
 ```{r}
 mod <- '
@@ -665,7 +665,7 @@ plot(summary(sdr2, "random")[-1 , 2], summary(sdr2d, "report")[ , 2])
 abline(0, 1, col = "red")
 ```
 
-## Model 3: RW1 time trend
+# Model 3: RW1 time trend
 
 ```{r}
 mod <- '
@@ -775,7 +775,7 @@ plot(inlafit$summary.random[[1]][ , 3], summary(sdr3, "report")[ , 2])
 abline(0, 1, col = "red")
 ```
 
-#### INLA with custom Cmatrix
+### INLA with custom Cmatrix
 
 ```{r}
 inlafitC <- inla(Observed ~ f(ID.Year, model = "generic0", Cmatrix = R_time,
@@ -792,7 +792,7 @@ summary(inlafit)
 summary(inlafitC)
 ```
 
-### Model 3b: Explicit sum-to-zero constraint
+## Model 3b: Explicit sum-to-zero constraint
 
 ```{r}
 mod <- '
@@ -896,7 +896,7 @@ plot(summary(sdr3, "report")[ , 2], summary(sdr3b, "report")[ , 2])
 abline(0, 1, col = "red")
 ```
 
-## Model 4: RW1 time + ICAR space
+# Model 4: RW1 time + ICAR space
 
 ```{r}
 mod <- '
@@ -1039,7 +1039,7 @@ plot(inlafit$summary.random[[2]][ , 3], sdr4sum[rownames(sdr4sum) == "u_space", 
 abline(0, 1, col = "red")
 ```
 
-#### INLA with custom Cmatrix
+### `R-INLA` with custom Cmatrix
 
 ```{r}
 inlafitC <- inla(Observed ~
@@ -1059,7 +1059,7 @@ summary(inlafit)
 summary(inlafitC)
 ```
 
-### Model 4b: Explicity sum-to-zero constraint
+## Model 4b: Explicity sum-to-zero constraint
 
 ```{r}
 mod <- '
@@ -1202,9 +1202,9 @@ plot(sdr4sum[rownames(sdr4sum) == "u_space", 2],
 abline(0, 1, col = "red")
 ```
 
-## Model 5: ICAR space x IID time
+# Model 5: ICAR space x IID time
 
-`RINLA` automatically applies a sum-to-zero constraint for the spatial field at each time.
+`R-INLA` automatically applies a sum-to-zero constraint for the spatial field at each time.
 This is too many constraints for an intercept plus interaction only model because it imposes that the average is the intercept at each time, and hence there is no time trend in the model.
 
 The correct specification for this model should probably be a single sum-to-zero constraint to account for the lost degree of freedom from the intercept term
@@ -1325,7 +1325,7 @@ plot(inlafit$summary.random[[1]][,3], summary(sdr5, "report")[,2],
 abline(0, 1, col = "red")
 ```
 
-#### `R-INLA` with custom Cmatrix
+### `R-INLA` with custom Cmatrix
 
 ```{r}
 R_space_time <- kronecker(R_time, R_space)
@@ -1348,7 +1348,7 @@ summary(inlafit)
 summary(inlafitC)
 ```
 
-### Model 5b: Express GMRF as kronecker product
+## Model 5b: Express GMRF as kronecker product
 
 ```{r}
 mod <- '
@@ -1449,7 +1449,7 @@ plot(summary(sdr5, "report")[ , 2],
 abline(0, 1, col = "red")
 ```
 
-### Model 5c: explicit sum-to-zero constraint
+## Model 5c: explicit sum-to-zero constraint
 
 ```{r}
 mod <- '
@@ -1558,7 +1558,7 @@ plot(summary(sdr5, "report")[ , 2],
 abline(0, 1, col = "red")
 ```
 
-## Model 6: IID x RW1
+# Model 6: IID x RW1
 
 Use and IID spatial effect, but a RW1 time effect. In this case, R-`INLA` by default does not add any constraint because the main effect is proper.
 
@@ -1585,7 +1585,7 @@ For the `group` model, the `R-INLA` log file does not make any comment about the
 deficiency. However, we will see below that internally that the rank deficiency
 which is imposed RW1 group model is accounted for.
 
-#### `R-INLA` with custom Cmatrix
+### `R-INLA` with custom Cmatrix
 
 ```{r}
 R_space <- diag(ncol(adj.mat))
@@ -1762,7 +1762,7 @@ plot(inlafit6$summary.random[[1]][,3], summary(sdr6, "report")[,2],
 abline(0, 1)
 ```
 
-### Model 6b: Express GMRF as a Kronecker product
+## Model 6b: Express GMRF as a Kronecker product
 
 ```{r}
 mod <- '
@@ -1864,7 +1864,7 @@ plot(summary(sdr6, "report")[,2], summary(sdr6b, "report")[,2],
 abline(0, 1)
 ```
 
-## Model 7: IID x RW1 with constraints
+# Model 7: IID x RW1 with constraints
 
 By changing the order of the main and group terms in the `R-INLA` smooth formula, we can implement the same model with constraints on the RW1 terms.
 First fit the unconstrained model and confirm it matches the previous version.
@@ -1896,7 +1896,7 @@ inlafit7 <- inla(Observed ~
 grep(".*rank.*", inlafit7_unconstr$logfile, value = TRUE)
 ```
 
-#### `R-INLA` with custom Cmatrix
+### `R-INLA` with custom Cmatrix
 
 ```{r}
 R_space <- diag(ncol(adj.mat))
@@ -2076,7 +2076,7 @@ plot(inlafit7C$summary.random[[1]][,3], summary(sdr7, "report")[,2],
 abline(0, 1, col = "red")
 ```
 
-### Model 7b: Explicit sum-to-zero constraint
+## Model 7b: Explicit sum-to-zero constraint
 
 ```{r}
 mod <- '
@@ -2192,7 +2192,7 @@ plot(inlafit7C$summary.random[[1]][ , 3], summary(sdr7b, "report")[,2],
 abline(0, 1, col = "red")
 ```
 
-## Model 8: ICAR space x RW1
+# Model 8: ICAR space x RW1
 
 Change the time trend to a RW1.
 The TMB code remains the same.
@@ -2214,13 +2214,15 @@ inlafit8 <- inla(Observed ~
                  data = data, E = Expected, family = "poisson",
                  control.inla = list(strategy = "gaussian", int.strategy = "eb"),
                  control.compute = list(config = TRUE))
+```
 
 Only the main effect (ICAR) rank deficiency is reflected in the log file.
 
+```{r}
 grep(".*rank.*", inlafit8$logfile, value = TRUE)
 ```
 
-#### `R-INLA` with custom Cmatrix
+### `R-INLA` with custom Cmatrix
 
 ```{r}
 R_space <- diag(rowSums(adj.mat)) - adj.mat
@@ -2387,7 +2389,6 @@ cbind("mean" = inlafit8C$misc$theta.mode,
       "se" = sqrt(diag(inlafit8C$misc$cov.intern)))
 ```
 
-
 Fixed effects (Intercept)
 
 ```{r}
@@ -2408,7 +2409,7 @@ plot(inlafit8C$summary.random[[1]][,3], summary(sdr8, "report")[,2],
 abline(0, 1, col = "red")
 ```
 
-### Model 8b: Explicit sum-to-zero constraint
+## Model 8b: Explicit sum-to-zero constraint
 
 ```{r}
 mod <- '
@@ -2528,7 +2529,7 @@ plot(inlafit8C$summary.random[[1]][ , 3], summary(sdr8b, "report")[,2],
 abline(0, 1, col = "red")
 ```
 
-## Model 9: ICAR space x RW1 time with full constraints
+# Model 9: ICAR space x RW1 time with full constraints
 
 ```{r}
 R_space <- diag(rowSums(adj.mat)) - adj.mat
@@ -2671,7 +2672,7 @@ plot(inlafit9C$summary.random[[1]][,3], summary(sdr9, "report")[,2],
 abline(0, 1, col = "red")
 ```
 
-### Model 9b: Explicit sum-to-zero constraint
+## Model 9b: Explicit sum-to-zero constraint
 
 This one gets slow!
 
@@ -2783,7 +2784,7 @@ plot(summary(sdr9, "report")[,2], summary(sdr9b, "report")[,2],
 abline(0, 1, col = "red")
 ```
 
-## Model 10: ICAR space + RW1 time + ICAR space x RW1 time
+# Model 10: ICAR space + RW1 time + ICAR space x RW1 time
 
 Model fit with full Type IV constraints
 
@@ -2946,17 +2947,20 @@ tmbfit <- nlminb(obj$par, obj$fn, obj$gr)
 
 sdr10 <- TMB::sdreport(obj)
 sdr10sum <- summary(sdr10, "all")
-
+```
 
 Hyper parameter comparison
 
+```{r}
 summary(sdr10, "fixed")
 
 cbind("mean" = inlafit10$misc$theta.mode,
       "se" = sqrt(diag(inlafit10$misc$cov.intern)))
+```
 
 Fixed effects (Intercept)
 
+```{r}
 summary(sdr10, "random")[1, , drop = FALSE]
 inlafit10$summary.fixed[ , 1:2]
 ```
@@ -2997,7 +3001,7 @@ plot(inlafit10$summary.random[[3]][,3],
 abline(0, 1, col = "red")
 ```
 
-## Model 11: AR1 time
+# Model 11: AR1 time
 
 This has row constraints on the interaction
 
@@ -3124,7 +3128,7 @@ plot(x, y,
 abline(0, 1, col = "red")
 ```
 
-## Model 12: IID space x AR1 time
+# Model 12: IID space x AR1 time
 
 ```{r}
 inlafit12 <- inla(Observed ~
@@ -3256,7 +3260,7 @@ plot(x, y,
 abline(0, 1, col = "red")
 ```
 
-## Model 13: ICAR space x AR1 time
+# Model 13: ICAR space x AR1 time
 
 This has row constraints on the interaction
 
