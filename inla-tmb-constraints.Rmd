@@ -260,7 +260,7 @@ plot(inlafit$summary.random[[1]][ , 3], summary(sdr2, "random")[-1, 2])
 abline(0, 1, col = "red")
 ```
 
-### INLA with custom Cmatrix
+## INLA with custom Cmatrix
 
 ```{r}
 diagval <- INLA:::inla.set.f.default()$diagonal
@@ -285,7 +285,7 @@ By setting `constr = TRUE` above, INLA infers the rank deficiency of one for the
 grep("rank", inlafitC$logfile, value = TRUE)
 ```
 
-### With `constr = FALSE`
+## With `constr = FALSE`
 
 If I change `constr = FALSE`, for the ICAR model `R-INLA` still calculates the rank deficiency of 1 based on the number of connected components of the graph.
 But for the `"generic0"` version, `R-INLA` no longer detects rank deficiency of the `Cmatrix`.
@@ -330,7 +330,7 @@ summary(inlafit_unconstr)
 summary(inlafitC_unconstr)
 ```
 
-### MRF in `mgcv`
+## MRF in `mgcv`
 
 ```{r}
 rownames(Q) <- colnames(Q) <- levels(data$IDf)
@@ -775,7 +775,7 @@ plot(inlafit$summary.random[[1]][ , 3], summary(sdr3, "report")[ , 2])
 abline(0, 1, col = "red")
 ```
 
-### INLA with custom Cmatrix
+## INLA with custom Cmatrix
 
 ```{r}
 inlafitC <- inla(Observed ~ f(ID.Year, model = "generic0", Cmatrix = R_time,
@@ -1039,7 +1039,7 @@ plot(inlafit$summary.random[[2]][ , 3], sdr4sum[rownames(sdr4sum) == "u_space", 
 abline(0, 1, col = "red")
 ```
 
-### `R-INLA` with custom Cmatrix
+## `R-INLA` with custom Cmatrix
 
 ```{r}
 inlafitC <- inla(Observed ~
@@ -1325,7 +1325,7 @@ plot(inlafit$summary.random[[1]][,3], summary(sdr5, "report")[,2],
 abline(0, 1, col = "red")
 ```
 
-### `R-INLA` with custom Cmatrix
+## `R-INLA` with custom Cmatrix
 
 ```{r}
 R_space_time <- kronecker(R_time, R_space)
@@ -1585,7 +1585,7 @@ For the `group` model, the `R-INLA` log file does not make any comment about the
 deficiency. However, we will see below that internally that the rank deficiency
 which is imposed RW1 group model is accounted for.
 
-### `R-INLA` with custom Cmatrix
+## `R-INLA` with custom Cmatrix
 
 ```{r}
 R_space <- diag(ncol(adj.mat))
@@ -1661,7 +1661,7 @@ plot(inlafit6$summary.random[[1]][,3],
 abline(a = 0, b = 1, col = "red")
 ```
 
-### TMB 
+## TMB 
 
 ```{r}
 mod <- '
@@ -1896,7 +1896,7 @@ inlafit7 <- inla(Observed ~
 grep(".*rank.*", inlafit7_unconstr$logfile, value = TRUE)
 ```
 
-### `R-INLA` with custom Cmatrix
+## `R-INLA` with custom Cmatrix
 
 ```{r}
 R_space <- diag(ncol(adj.mat))
@@ -1971,7 +1971,7 @@ plot(inlafit7$summary.random[[1]][order(inlafit7$summary.random[[1]]$ID), 3],
 abline(a = 0, b = 1, col = "red")
 ```
 
-### TMB 
+## TMB 
 
 ```{r}
 mod <- '
@@ -2222,7 +2222,7 @@ Only the main effect (ICAR) rank deficiency is reflected in the log file.
 grep(".*rank.*", inlafit8$logfile, value = TRUE)
 ```
 
-### `R-INLA` with custom Cmatrix
+## `R-INLA` with custom Cmatrix
 
 ```{r}
 R_space <- diag(rowSums(adj.mat)) - adj.mat
@@ -2301,7 +2301,7 @@ plot(inlafit8$summary.random[[1]][order(inlafit8$summary.random[[1]]$ID), 3],
 abline(a = 0, b = 1, col = "red")
 ```
 
-### TMB 
+## TMB 
 
 ```{r}
 mod <- '
@@ -2568,7 +2568,7 @@ grep(".*rank.*", inlafit9C$logfile, value = TRUE)
 summary(inlafit9C)
 ```
 
-### TMB 
+## TMB 
 
 ```{r}
 mod <- '
@@ -2838,7 +2838,7 @@ Hyper parameters
 inlafit10$internal.summary.hyperpar[, 1:2]
 ```
 
-### TMB 
+## TMB 
 
 ```{r}
 mod <- '
@@ -3023,7 +3023,7 @@ Hyper parameters
 inlafit11$internal.summary.hyperpar[, 1:2]
 ```
 
-### TMB 
+## TMB 
 
 ```{r}
 mod <- '
@@ -3149,7 +3149,7 @@ Hyper parameters
 inlafit12$internal.summary.hyperpar[, 1:2]
 ```
 
-### TMB 
+## TMB 
 
 ```{r}
 mod <- '
@@ -3290,7 +3290,7 @@ Constraints
 nrow(inlafit13$misc$configs$constr$A)
 ```
 
-### TMB
+## TMB
 
 The precision matrix for the ICAR x AR1 interacation is expressed as $Q = Q_{time} \otimes Q_{space}$.
 `SEPARABLE` calculates the density assuming both are full rank.
